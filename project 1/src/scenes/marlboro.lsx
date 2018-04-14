@@ -1,0 +1,1151 @@
+<SCENE>
+
+<!-- Initial values -->
+<INITIALS>
+    <frustum near="0.1" far="500"/>                 
+    <translation x="-1" y="1" z="0" />               
+    <rotation axis="x" angle="0" />                
+    <rotation axis="y" angle="0" />                
+    <rotation axis="z" angle="0" />                
+    <scale sx="0.25" sy="0.25" sz="0.25" />         
+    <reference length="1" />                        
+</INITIALS>
+
+
+<!-- Illumination and clear colour -->
+<ILLUMINATION>
+    <ambient r="0.2" g="0.2" b="0.2" a="1" />       
+    <background r="0" g="0" b="0" a="1" />          
+</ILLUMINATION>
+
+
+<!-- Lights -->
+<LIGHTS>	
+	<LIGHT id="Pack Top">                                    
+        <enable value ="1" />                   	       
+        <position  x="15" y="25" z="9" w="1" />       	   
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />        	 
+        <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />        
+        <specular r="1.0" g="1.0" b="1.0" a="1.0" />      
+    </LIGHT>
+
+	<LIGHT id="Pack Left">                                    
+        <enable value ="0" />                   	      
+        <position x="10" y="8" z="18" w="1" />       	   
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />       
+        <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />        
+        <specular r="1.0" g="1.0" b="1.0" a="1.0" />       
+    </LIGHT>
+
+	<LIGHT id="Pack Right">                                    
+        <enable value ="0" />                   	      
+        <position x="10" y="8" z="5" w="1" />       	   
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />       
+        <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />        
+        <specular r="1.0" g="1.0" b="1.0" a="1.0" />       
+    </LIGHT>
+
+	<LIGHT id="Pack Front">                                    
+        <enable value ="0" />                   	      
+        <position x="17" y="2" z="12" w="1" />       	   
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />       
+        <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />        
+        <specular r="1.0" g="1.0" b="1.0" a="1.0" />       
+    </LIGHT>
+
+	<LIGHT id="Pack Inside">                                    
+        <enable value ="0" />                   	      
+        <position x="8" y="11" z="12" w="1" />       	   
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />       
+        <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />        
+        <specular r="1.0" g="1.0" b="1.0" a="1.0" />       
+    </LIGHT>
+	
+	<LIGHT id="No Smoking">                                   
+        <enable value ="1" />                   	       
+        <position x="-4" y="8" z="20" w="1" />       		   
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />      
+        <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />        
+        <specular r="1.0" g="1.0" b="1.0" a="1.0" />       
+    </LIGHT>
+</LIGHTS>
+
+<!-- Textures -->
+<TEXTURES>
+	<TEXTURE id="floorTexture">
+        <file path="images/floor.jpg" />               
+        <amplif_factor s="6" t="4" />                           
+    </TEXTURE>
+
+	<TEXTURE id="cigaretteTexture">
+        <file path="images/cigarette.jpg" />   
+        <amplif_factor s="1" t="1" />                           
+    </TEXTURE>
+	
+	<TEXTURE id="marlboroFrenteTexture">
+        <file path="images/marlboroFrente.jpg" />               
+        <amplif_factor s="5" t="4" />                           
+    </TEXTURE>
+	
+	<TEXTURE id="marlboroLadoTexture">
+        <file path="images/marlboroLado.jpg" />               
+        <amplif_factor s="5" t="4" />                           
+    </TEXTURE>
+	
+	<TEXTURE id="marlboroTopoTexture">
+        <file path="images/marlboroTopo.jpg" />               
+        <amplif_factor s="1" t="1" />                           
+    </TEXTURE>
+	
+	<TEXTURE id="smokingKillsTexture">
+        <file path="images/smokingKills.jpg" />               
+        <amplif_factor s="5" t="4" />                           
+    </TEXTURE>
+	
+	<TEXTURE id="noSmokingSignTexture">
+        <file path="images/noSmoking.jpg" />               
+        <amplif_factor s="1" t="1" />                           
+    </TEXTURE>
+</TEXTURES>
+
+
+<MATERIALS>
+    <MATERIAL id="cigaretteMaterial">                                  
+        <shininess value="1" />
+        <specular r="0.7" g="0.7" b="0.7" a="1" />        
+        <diffuse r="0.9" g="0.9" b="0.9" a="0.9" />       
+        <ambient r="0.3" g="0.3" b="0.3" a="1" />         
+        <emission r="0.0" g="0.0" b="0.0" a="1" />      
+    </MATERIAL>
+
+    <MATERIAL id="floorMaterial">                                  
+        <shininess value="1" />
+        <specular r="0.0" g="0.0" b="0.0" a="1" />        
+        <diffuse r="0.4" g="0.4" b="0.4" a="1" />       
+        <ambient r="0.647059" g="0.164706" b="0.164706" a="1" />         
+        <emission r="0.0" g="0.0" b="0.0" a="1" />        
+    </MATERIAL>
+
+    <MATERIAL id="adMaterial">                                  
+        <shininess value="1" />
+        <specular r="0.0" g="0.0" b="0.0" a="1" />        
+        <diffuse r="0" g="0" b="0" a="1" />       
+        <ambient r="1" g="1" b="1" a="1" />         
+        <emission r="0.0" g="0.0" b="0.0" a="1" />        
+    </MATERIAL>	
+
+    <MATERIAL id="noSmokingMaterial">                                  
+        <shininess value="1" />
+        <specular r="0.0" g="0.0" b="0.0" a="1" />        
+        <diffuse r="0.4" g="0.4" b="0.4" a="1" />       
+        <ambient r="0.2" g="0" b="0" a="1" />         
+        <emission r="0.0" g="0.0" b="0.0" a="1" />        
+    </MATERIAL>	
+
+    <MATERIAL id="insidePaperMaterial">                                  
+        <shininess value="1" />
+        <specular r="0.4" g="0.4" b="0.4" a="1" />        
+        <diffuse r="0.9" g="0.9" b="0.9" a="0.9" />       
+        <ambient r="0" g="0" b="0" a="1" />         
+        <emission r="0.2" g="0.2" b="0.2" a="1" />         
+    </MATERIAL>
+	
+   <MATERIAL id="insideTopMaterial">                                  
+        <shininess value="1" />
+        <specular r="0.0" g="0.0" b="0.0" a="1" />        
+        <diffuse r="0.4" g="0.4" b="0.4" a="1" />       
+        <ambient r="1" g="0.972549" b="0.972549" a="1" />         
+        <emission r="0.0" g="0.0" b="0.0" a="1" />       
+    </MATERIAL>	
+
+    <!-- A default material -->
+    <MATERIAL id="defaultMaterial">                                  
+        <shininess value="1" />
+        <specular r="0.0" g="0.0" b="0.0" a="1" />        
+        <diffuse r="0.4" g="0.4" b="0.4" a="1" />       
+        <ambient r="0.4" g="0.4" b="0.4" a="1" />         
+        <emission r="0.0" g="0.0" b="0.0" a="1" />        
+    </MATERIAL>
+</MATERIALS>
+
+<!-- The nodes -->
+<NODES>
+    <ROOT id="root" />     
+
+    <!-- The root node -->
+    <NODE id="root">       
+        <MATERIAL id="defaultMaterial" />         
+        <TEXTURE id="null" />  
+
+        <DESCENDANTS>
+            <NODEREF id="floor" />
+			<NODEREF id="lonelyCigarette" />
+			<NODEREF id="pack"/>
+			<NODEREF id="smokingAd" />
+        </DESCENDANTS>
+    </NODE>
+
+	<!-- The floor, consisting of a patch with degrees 2/1 -->
+	<NODE id="floor">      
+        <MATERIAL id="floorMaterial" />    
+        <TEXTURE id="floorTexture" />
+
+        <SCALE sx="6" sy="6" sz="7" />
+        <TRANSLATION x="3" y="0" z="2.3" />
+        <ROTATION axis="x" angle="-90" />
+
+        <DESCENDANTS>
+			<LEAF type="patch" args="50 50">
+				<CPLINE>
+					<CPOINT xx="-2" yy="-2" zz="-1" ww="1" />
+					<CPOINT xx="-10" yy="3" zz="-1" ww="1" />
+				</CPLINE>	
+				<CPLINE>
+					<CPOINT xx="-2" yy="-2" zz="0" ww="1" />
+					<CPOINT xx="-10" yy="3" zz="0" ww="1" />
+				</CPLINE>
+				<CPLINE>
+					<CPOINT xx="2" yy="-2" zz="0" ww="1" />
+					<CPOINT xx="2" yy="2" zz="0" ww="1" />
+				</CPLINE>			
+			</LEAF>
+		</DESCENDANTS>
+    </NODE>
+
+	<!-- The no-smoking advertisements -->
+    <NODE id="smokingAd">      
+        <MATERIAL id="adMaterial" />    
+        <TEXTURE id="smokingKillsTexture" />       			
+
+        <DESCENDANTS>
+            <NODEREF id="smokingSign" />
+			<NODEREF id="smokingSphere" />
+		</DESCENDANTS>
+    </NODE>
+
+	<!-- The 'smoking kills' advertisement -->
+    <NODE id="smokingSign">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       			
+
+        <SCALE sx="3" sy="3" sz="1" />		
+        <TRANSLATION x="3" y="0" z="0" />
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 4 5 0" />        
+		</DESCENDANTS>
+    </NODE>
+
+	<!-- The 'no smoking here' sign sphere -->
+    <NODE id="smokingSphere">      
+        <MATERIAL id="noSmokingMaterial" />    
+        <TEXTURE id="noSmokingSignTexture" />       			
+
+        <ROTATION axis="y" angle="55" />
+        <TRANSLATION x="-14" y="10.1" z="8" />
+
+        <DESCENDANTS>
+			<LEAF  type="sphere" args="2 50 50" />        
+		</DESCENDANTS>
+    </NODE>
+
+	<!-- The tobacco pack with the cigarettes and the pack itself -->
+    <NODE id="pack">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       			
+
+        <ROTATION axis="y" angle="-6" />
+        <TRANSLATION x="0" y="-0.3" z="0" />
+		
+        <DESCENDANTS>
+            <NODEREF id="packStructure" />
+            <NODEREF id="cigarettes" />
+		</DESCENDANTS>
+    </NODE>
+
+	<!-- The pack structure, consisting of rectangles and triangles -->
+    <NODE id="packStructure">      
+        <MATERIAL id="cigaretteMaterial" />    
+        <TEXTURE id="null" />       			
+		
+        <DESCENDANTS>
+            <NODEREF id="facinFront" />
+            <NODEREF id="facinBack" />
+            <NODEREF id="facinLeft" />
+            <NODEREF id="facinRight" />
+            <NODEREF id="triangleLeft" />
+            <NODEREF id="triangleRight" />
+            <NODEREF id="backBackOutside" />
+            <NODEREF id="backBackInside" />
+			<NODEREF id="theInside" />
+			<NODEREF id="theOutsideTop" />
+			<NODEREF id="theInsideTop" />	
+		</DESCENDANTS>
+    </NODE>
+
+    <NODE id="theInsideTop">      
+        <MATERIAL id="insideTopMaterial" />    
+        <TEXTURE id="null" />       			
+	
+        <DESCENDANTS>
+            <NODEREF id="theInsideTopTriangleLeft" />
+            <NODEREF id="theInsideTopRectangleLeft" />
+            <NODEREF id="theInsideTopTriangleRight" />
+            <NODEREF id="theInsideTopRectangleRight" />
+            <NODEREF id="theInsideTopBackPiece" />
+			<NODEREF id="theInsideTopLowerPiece" />
+			<NODEREF id="theInsideTopPiece" />
+		</DESCENDANTS>
+    </NODE>
+
+    <NODE id="theInsideTopPiece">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       				
+
+		<ROTATION axis="x" angle="90" />
+		<TRANSLATION x="8.25" y="8.1" z="-11.5" />	
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 7.5 3 0" />        
+		</DESCENDANTS>
+    </NODE>	
+
+    <NODE id="theInsideTopLowerPiece">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       				
+
+		<ROTATION axis="x" angle="-90" />
+		<TRANSLATION x="8.25" y="-15.6" z="8" />	
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 7.5 1 0" />        
+		</DESCENDANTS>
+    </NODE>
+
+    <NODE id="theInsideTopBackPiece">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       				
+
+		<ROTATION axis="y" angle="-270" />
+		<SCALE sx="1.5" sy="1" sz="1" />
+		<TRANSLATION x="-10.4" y="8" z="8.25" />	
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 3.5 5 0" />        
+		</DESCENDANTS>
+    </NODE>
+
+	<NODE id="theInsideTopRectangleRight">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       					
+
+		<ROTATION axis="y" angle="180" />
+		<TRANSLATION x="-9.25" y="8" z="-15.6" />
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 3.5 1 0" />  
+		</DESCENDANTS>
+    </NODE>
+
+	<NODE id="theInsideTopTriangleRight">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       					
+
+		<ROTATION axis="y" angle="180" />
+		<TRANSLATION x="-11.25" y="8" z="-15.6" />
+
+        <DESCENDANTS>
+			<LEAF type="triangle" args="2 0 0 2 3.5 0 0 3.5 0" />        
+		</DESCENDANTS>
+    </NODE>
+
+	<NODE id="theInsideTopTriangleLeft">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       					
+
+		<TRANSLATION x="9.25" y="8" z="8.1" />		
+
+        <DESCENDANTS>
+			<LEAF type="triangle" args="0 0 0 2 3.5 0 0 3.5 0" />        
+		</DESCENDANTS>
+    </NODE>
+
+	<NODE id="theInsideTopRectangleLeft">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       			
+
+		<TRANSLATION x="8.25" y="8" z="8.1" />		
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 3.5 1 0" />
+		</DESCENDANTS>
+    </NODE>
+
+    <NODE id="theOutsideTop">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="marlboroTopoTexture" />       			
+	
+        <DESCENDANTS>
+            <NODEREF id="theOutsideTopTriangleLeft" />
+            <NODEREF id="theOutsideTopRectangleLeft" />
+            <NODEREF id="theOutsideTopTriangleRight" />
+            <NODEREF id="theOutsideTopRectangleRight" />		
+            <NODEREF id="theOutsideTopBackPiece" />
+			<NODEREF id="theOutsideTopLowerPiece" />
+			<NODEREF id="theOutsideTopPiece" />
+		</DESCENDANTS>
+    </NODE>
+	
+	<NODE id="theOutsideTopTriangleRight">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       					
+
+		<ROTATION axis="y" angle="180" />
+		<TRANSLATION x="-11.25" y="8" z="-8.1" />
+
+        <DESCENDANTS>
+			<LEAF type="triangle" args="2 0 0 2 3.5 0 0 3.5 0" />        
+		</DESCENDANTS>
+    </NODE>
+
+	<NODE id="theOutsideTopRectangleRight">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       					
+
+		<ROTATION axis="y" angle="180" />
+		<TRANSLATION x="-9.25" y="8" z="-8.1" />
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 3.5 1 0" />  
+		</DESCENDANTS>
+    </NODE>
+
+    <NODE id="theOutsideTopLowerPiece">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       				
+
+		<ROTATION axis="x" angle="90" />
+		<TRANSLATION x="8.25" y="8.1" z="-8" />	
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 7.5 1 0" />        
+		</DESCENDANTS>
+    </NODE>
+	
+    <NODE id="theOutsideTopPiece">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       				
+
+		<ROTATION axis="x" angle="-90" />
+		<TRANSLATION x="8.25" y="-15.6" z="11.5" />	
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 7.5 3 0" />        
+		</DESCENDANTS>
+    </NODE>	
+
+    <NODE id="theOutsideTopBackPiece">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       				
+
+		<ROTATION axis="y" angle="270" />
+		<SCALE sx="1.5" sy="1" sz="1" />	
+		<TRANSLATION x="5.4" y="8" z="-8.25" />	
+		
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 3.5 5 0" />        
+		</DESCENDANTS>
+    </NODE>
+
+	<NODE id="theOutsideTopTriangleLeft">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       					
+
+		<TRANSLATION x="9.25" y="8" z="15.6" />		
+
+        <DESCENDANTS>
+			<LEAF type="triangle" args="0 0 0 2 3.5 0 0 3.5 0" />        
+		</DESCENDANTS>
+    </NODE>
+
+	<NODE id="theOutsideTopRectangleLeft">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       			
+
+		<TRANSLATION x="8.25" y="8" z="15.6" />		
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 3.5 1 0" />
+		</DESCENDANTS>
+    </NODE>
+
+    <NODE id="theInside">      
+        <MATERIAL id="insidePaperMaterial" />    
+        <TEXTURE id="null" />       			
+	
+        <DESCENDANTS>
+            <NODEREF id="theInsideFacinLeft" />
+            <NODEREF id="theInsideFacinRight" />
+            <NODEREF id="theInsideFacinFront" />
+		</DESCENDANTS>
+    </NODE>
+
+    <NODE id="theInsideFacinFront">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       			
+
+        <DESCENDANTS>
+            <NODEREF id="theInsideFacinFrontFirst" />
+            <NODEREF id="theInsideFacinFrontSecond" />
+            <NODEREF id="theInsideFacinFrontThird" />
+		</DESCENDANTS>
+    </NODE>
+
+	<NODE id="theInsideFacinFrontFirst">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       			
+		
+		<ROTATION axis="y" angle="90" />
+		<SCALE sx="1.5" sy="1.7" sz="1" />	
+        <TRANSLATION x="-10.35" y="0" z="12.7" />	
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 4 4.9 0" />
+		</DESCENDANTS>
+    </NODE>
+	
+	<NODE id="theInsideFacinFrontSecond">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       			
+
+		<ROTATION axis="y" angle="90" />
+		<SCALE sx="0.1" sy="2" sz="1" />	
+        <TRANSLATION x="-156" y="0" z="12.7" />	
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 4 4.9 0" />
+		</DESCENDANTS>
+    </NODE>
+
+	<NODE id="theInsideFacinFrontThird">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       			
+
+		<ROTATION axis="y" angle="90" />
+		<SCALE sx="0.1" sy="2" sz="1" />	
+        <TRANSLATION x="-86.3" y="0" z="12.7" />	
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 4 4.9 0" />
+		</DESCENDANTS>
+    </NODE>
+
+    <NODE id="theInsideFacinRight">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       			
+
+		<SCALE sx="0.68" sy="2" sz="1" />
+        <ROTATION axis="y" angle="180" />		
+
+        <DESCENDANTS>
+            <NODEREF id="theInsideFacinRightFirst" />
+            <NODEREF id="theInsideFacinRightSecond" />
+		</DESCENDANTS>
+    </NODE>
+
+	<NODE id="theInsideFacinRightFirst">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       			
+
+		<TRANSLATION x="-18.6" y="0" z="-15.65" />
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 4 5 0" />
+		</DESCENDANTS>
+    </NODE>
+	
+	<NODE id="theInsideFacinRightSecond">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       			
+
+		<TRANSLATION x="-18.6" y="0" z="-8.15" />
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 4 5 0" />
+		</DESCENDANTS>
+    </NODE>
+
+    <NODE id="theInsideFacinLeft">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       			
+
+		<SCALE sx="0.68" sy="2" sz="1" />	
+
+        <DESCENDANTS>
+            <NODEREF id="theInsideFacinLeftFirst" />
+            <NODEREF id="theInsideFacinLeftSecond" />
+		</DESCENDANTS>
+    </NODE>
+
+	<NODE id="theInsideFacinLeftFirst">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       			
+
+		<TRANSLATION x="13.6" y="0" z="8.2" />		
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 4 5 0" />
+		</DESCENDANTS>
+    </NODE>
+	
+	<NODE id="theInsideFacinLeftSecond">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       			
+
+		<TRANSLATION x="13.6" y="0" z="15.51" />
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 4 5 0" />
+		</DESCENDANTS>
+    </NODE>
+
+    <NODE id="backBackOutside">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="marlboroTopoTexture" />       			
+
+		<ROTATION axis="y" angle="270" />
+		<SCALE sx="1.5" sy="0.8" sz="1" />	
+        <TRANSLATION x="-5" y="0" z="0" />
+		<TRANSLATION x="10.4" y="6" z="-9.25" />	
+	
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 4 5 0" />
+		</DESCENDANTS>
+    </NODE>
+	
+    <NODE id="backBackInside">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       			
+
+		<ROTATION axis="y" angle="90" />
+		<SCALE sx="1.5" sy="0.8" sz="1" />	
+        <TRANSLATION x="-5" y="0" z="0" />
+		<TRANSLATION x="-5.4" y="6" z="9.25" />	
+	
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 4 5 0" />
+		</DESCENDANTS>
+    </NODE>
+
+    <NODE id="triangleLeft">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />   
+	
+        <DESCENDANTS>
+            <NODEREF id="triangleInsideLeft" />
+			<NODEREF id="triangleOusideLeft" />  
+		</DESCENDANTS>
+    </NODE>
+
+    <NODE id="triangleInsideLeft">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       					
+
+		<TRANSLATION x="9.25" y="6" z="8.1" />		
+
+        <DESCENDANTS>
+			<LEAF type="triangle" args="0 0 0 3.5 0 0 0 2 0" />        
+		</DESCENDANTS>
+    </NODE>
+
+    <NODE id="triangleOusideLeft">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="marlboroTopoTexture" />       			
+
+		<TRANSLATION x="9.25" y="6" z="15.6" />		
+
+        <DESCENDANTS>
+			<LEAF type="triangle" args="0 0 0 3.5 0 0 0 2 0" />        
+		</DESCENDANTS>
+    </NODE>
+
+    <NODE id="triangleRight">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />   
+	
+        <ROTATION axis="y" angle="180" />			
+	
+        <DESCENDANTS>
+            <NODEREF id="triangleInsideRight" />
+			<NODEREF id="triangleOusideRight" />  
+		</DESCENDANTS>
+    </NODE>
+
+    <NODE id="triangleInsideRight">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="marlboroTopoTexture" />       					
+
+		<TRANSLATION x="-12.75" y="6" z="-8.1" />		
+
+        <DESCENDANTS>
+			<LEAF type="triangle" args="0 0 0 3.5 0 0 3.5 2 0" />        
+		</DESCENDANTS>
+    </NODE>
+
+    <NODE id="triangleOusideRight">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       			
+
+		<TRANSLATION x="-12.75" y="6" z="-15.6" />		
+
+        <DESCENDANTS>
+			<LEAF type="triangle" args="0 0 0 3.5 0 0 3.5 2 0" />        
+		</DESCENDANTS>
+    </NODE>
+
+    <NODE id="facinRight">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />   
+		
+		<SCALE sx="0.7" sy="1.5" sz="1" />
+        <ROTATION axis="y" angle="180" />		
+	
+        <DESCENDANTS>
+            <NODEREF id="insideRight" />
+			<NODEREF id="outsideRight" />  
+		</DESCENDANTS>
+    </NODE>
+
+    <NODE id="insideRight">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       					
+
+		<TRANSLATION x="-18.2" y="0" z="-15.6" />
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 4 5 0" />        
+		</DESCENDANTS>
+    </NODE>
+
+    <NODE id="outsideRight">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="marlboroLadoTexture" />       			
+	
+		<TRANSLATION x="-18.2" y="0" z="-8.1" />
+	
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 4 5 0" />        
+		</DESCENDANTS>
+    </NODE>
+
+    <NODE id="facinLeft">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />   
+		
+		<SCALE sx="0.7" sy="1.5" sz="1" />	
+	
+        <DESCENDANTS>
+            <NODEREF id="insideLeft" />
+			<NODEREF id="outsideLeft" />  
+		</DESCENDANTS>
+    </NODE>
+
+    <NODE id="insideLeft">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       					
+
+		<TRANSLATION x="13.2" y="0" z="8.1" />		
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 4 5 0" />        
+		</DESCENDANTS>
+    </NODE>
+
+    <NODE id="outsideLeft">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="marlboroLadoTexture" />       			
+	
+		<TRANSLATION x="13.2" y="0" z="15.6" />		
+	
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 4 5 0" />        
+		</DESCENDANTS>
+    </NODE>
+	
+    <NODE id="facinBack">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />   
+		
+		<ROTATION axis="y" angle="270" />
+		<SCALE sx="1.5" sy="1.5" sz="1" />	
+        <TRANSLATION x="-5" y="0" z="0" />	
+	
+        <DESCENDANTS>
+            <NODEREF id="insideBack" />
+			<NODEREF id="outsideBack" />  
+		</DESCENDANTS>
+    </NODE>
+
+    <NODE id="outsideBack">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="marlboroFrenteTexture" />       				
+		
+		<TRANSLATION x="10.4" y="0" z="-9.25" />	
+		
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 4 5 0" />        
+		</DESCENDANTS>
+    </NODE>
+
+    <NODE id="insideBack">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       			
+	
+		<TRANSLATION x="10.4" y="0" z="-12.7" />	
+	
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 4 5 0" />        
+		</DESCENDANTS>
+    </NODE>
+	
+    <NODE id="facinFront">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />   
+		
+		<ROTATION axis="y" angle="90" />
+		<SCALE sx="1.5" sy="1.5" sz="1" />	
+        <TRANSLATION x="-5" y="0" z="0" />	
+	
+        <DESCENDANTS>
+            <NODEREF id="insideFront" />
+			<NODEREF id="outsideFront" />  
+		</DESCENDANTS>
+    </NODE>
+
+    <NODE id="insideFront">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       				
+		
+		<TRANSLATION x="-5.4" y="0" z="9.25" />	
+		
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 4 5 0" />        
+		</DESCENDANTS>
+    </NODE>
+
+    <NODE id="outsideFront">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="marlboroFrenteTexture" />       			
+	
+		<TRANSLATION x="-5.4" y="0" z="12.75" />	
+	
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 4 5 0" />        
+		</DESCENDANTS>
+    </NODE>
+
+	<!-- The 20 cigarettes inside the pack, divided by lines, consisting of cylinders -->
+    <NODE id="cigarettes">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       			
+
+        <ROTATION axis="x" angle="-90" />
+        <SCALE sx="0.5" sy="0.5" sz="2" />		
+
+        <DESCENDANTS>
+			<NODEREF id="cigaretteFirstLine" />
+			<NODEREF id="cigaretteSecondLine" />
+			<NODEREF id="cigaretteThirdLine" />			
+		</DESCENDANTS>
+    </NODE>
+
+    <NODE id="cigaretteFirstLine">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       			
+		
+        <DESCENDANTS>
+			<NODEREF id="cigarette1" />
+			<NODEREF id="cigarette2" />
+			<NODEREF id="cigarette3" />
+			<NODEREF id="cigarette4" />
+			<NODEREF id="cigarette5" />
+			<NODEREF id="cigarette6" />
+			<NODEREF id="cigarette7" />
+		</DESCENDANTS>
+    </NODE>
+
+    <NODE id="cigaretteSecondLine">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       			
+		
+        <DESCENDANTS>
+			<NODEREF id="cigarette8" />
+			<NODEREF id="cigarette9" />
+			<NODEREF id="cigarette10" />
+			<NODEREF id="cigarette11" />
+			<NODEREF id="cigarette12" />
+			<NODEREF id="cigarette13" />
+		</DESCENDANTS>
+    </NODE>
+
+    <NODE id="cigaretteThirdLine">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       			
+		
+        <DESCENDANTS>
+			<NODEREF id="cigarette14" />
+			<NODEREF id="cigarette15" />
+			<NODEREF id="cigarette16" />
+			<NODEREF id="cigarette17" />
+			<NODEREF id="cigarette18" />
+			<NODEREF id="cigarette19" />
+			<NODEREF id="cigarette20" />
+		</DESCENDANTS>
+    </NODE>
+
+    <NODE id="cigarette1">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />
+			
+        <TRANSLATION x="20" y="-30" z="0" />
+
+        <DESCENDANTS>
+			<NODEREF id="cigarette" /> 
+		</DESCENDANTS>
+    </NODE>
+	
+    <NODE id="cigarette2">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />
+			
+        <TRANSLATION x="20" y="-27.9" z="0" />
+
+        <DESCENDANTS>
+			<NODEREF id="cigarette" />   
+		</DESCENDANTS>
+    </NODE>
+	
+	<NODE id="cigarette3">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />
+			
+        <TRANSLATION x="20" y="-25.8" z="0" />
+
+        <DESCENDANTS>
+			<NODEREF id="cigarette" />  
+		</DESCENDANTS>
+    </NODE>
+	
+    <NODE id="cigarette4">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />
+			
+        <TRANSLATION x="20" y="-23.7" z="0" />
+
+        <DESCENDANTS>
+			<NODEREF id="cigarette" />   
+		</DESCENDANTS>
+    </NODE>
+	
+    <NODE id="cigarette5">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />
+			
+        <TRANSLATION x="20" y="-21.6" z="0" />
+
+        <DESCENDANTS>
+			<NODEREF id="cigarette" /> 
+		</DESCENDANTS>
+    </NODE>
+	
+    <NODE id="cigarette6">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />
+			
+        <TRANSLATION x="20" y="-19.5" z="0" />
+
+        <DESCENDANTS>
+			<NODEREF id="cigarette" /> 
+		</DESCENDANTS>
+    </NODE>
+
+    <NODE id="cigarette7">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />
+			
+        <TRANSLATION x="20" y="-17.4" z="0" />
+
+        <DESCENDANTS>
+			<NODEREF id="cigarette" />   
+		</DESCENDANTS>
+    </NODE>
+	
+    <NODE id="cigarette8">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />
+			
+        <TRANSLATION x="22.1" y="-28.95" z="0" />
+
+        <DESCENDANTS>
+			<NODEREF id="cigarette" />  
+		</DESCENDANTS>
+    </NODE>
+	
+    <NODE id="cigarette9">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />
+			
+        <TRANSLATION x="22.1" y="-26.85" z="0" />
+
+        <DESCENDANTS>
+			<NODEREF id="cigarette" /> 
+		</DESCENDANTS>
+    </NODE>
+	
+	<NODE id="cigarette10">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />
+			
+        <TRANSLATION x="22.1" y="-24.75" z="0" />
+
+        <DESCENDANTS>
+			<NODEREF id="cigarette" />      
+		</DESCENDANTS>
+    </NODE>
+	
+    <NODE id="cigarette11">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />
+			
+        <TRANSLATION x="22.1" y="-22.65" z="0" />
+
+        <DESCENDANTS>
+			<NODEREF id="cigarette" /> 
+		</DESCENDANTS>
+    </NODE>
+	
+    <NODE id="cigarette12">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />
+			
+        <TRANSLATION x="22.1" y="-20.55" z="0" />
+
+        <DESCENDANTS>
+			<NODEREF id="cigarette" />   
+		</DESCENDANTS>
+    </NODE>
+	
+    <NODE id="cigarette13">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />
+			
+        <TRANSLATION x="22.1" y="-18.45" z="0" />
+
+        <DESCENDANTS>
+			<NODEREF id="cigarette" /> 
+		</DESCENDANTS>
+    </NODE>
+
+   <NODE id="cigarette14">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />
+			
+        <TRANSLATION x="24.2" y="-30" z="0" />
+
+        <DESCENDANTS>
+			<NODEREF id="cigarette" /> 
+		</DESCENDANTS>
+    </NODE>
+	
+    <NODE id="cigarette15">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />
+			
+        <TRANSLATION x="24.2" y="-27.9" z="0" />
+
+        <DESCENDANTS>
+			<NODEREF id="cigarette" /> 
+		</DESCENDANTS>
+    </NODE>
+	
+	<NODE id="cigarette16">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />
+			
+        <TRANSLATION x="24.2" y="-25.8" z="0" />
+
+        <DESCENDANTS>
+			<NODEREF id="cigarette" /> 
+		</DESCENDANTS>
+    </NODE>
+	
+    <NODE id="cigarette17">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />
+			
+        <TRANSLATION x="24.2" y="-23.7" z="1" />
+
+        <DESCENDANTS>
+			<NODEREF id="cigarette" /> 
+		</DESCENDANTS>
+    </NODE>
+	
+    <NODE id="cigarette18">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />
+			
+        <TRANSLATION x="24.2" y="-21.6" z="2" />
+
+        <DESCENDANTS>
+			<NODEREF id="cigarette" /> 
+		</DESCENDANTS>
+    </NODE>
+	
+    <NODE id="cigarette19">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />
+			
+        <TRANSLATION x="24.2" y="-19.5" z="0" />
+
+        <DESCENDANTS>
+			<NODEREF id="cigarette" />  
+		</DESCENDANTS>
+    </NODE>
+
+    <NODE id="cigarette20">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />
+			
+        <TRANSLATION x="24.2" y="-17.4" z="0" />
+
+        <DESCENDANTS>
+			<NODEREF id="cigarette" /> 
+		</DESCENDANTS>
+    </NODE>
+
+	<!-- The lonely cigarette in the table, consisting of a cylinder -->
+	<NODE id="lonelyCigarette">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />
+			
+		<ROTATION axis="y" angle="190" />
+        <SCALE sx="0.5" sy="0.5" sz="2" />		
+        <TRANSLATION x="-35.2" y="1" z="-8" />
+
+        <DESCENDANTS>
+			<NODEREF id="cigarette" /> 
+		</DESCENDANTS>
+    </NODE>
+
+	<!-- Generic cigarette. In this scene, all the cigarettes are of the same size, so they all point to this node. -->
+    <NODE id="cigarette">      
+        <MATERIAL id="cigaretteMaterial" />    
+        <TEXTURE id="cigaretteTexture" />
+
+        <DESCENDANTS>
+			<LEAF  type="cylinder" args="4 1 1 50 50 1 1" />  
+		</DESCENDANTS>
+    </NODE>
+</NODES>
+
+</SCENE>
