@@ -27,6 +27,7 @@ function Board(scene) {
 
 	this.circular = new CircularAnimation(this.scene, "BoardRotation", 10000000, 0, 0, 0, 0, 0, 180, 1);
 	this.undoAnimation = undefined;
+	this.returnAnimation = undefined;
 	this.botBotOne = true;
 
 	this.boardPrimitive = new BoardPrimitive(this.scene);
@@ -172,7 +173,7 @@ Board.prototype.display = function() {
 			this.scene.botInPlay = false;
 		
 		this.displayBoard();
-	} else if (!this.scene.selectedMoveAnimation.ended || !this.scene.removedMoveAnimation.ended) {
+	} else if (!this.scene.selectedMoveAnimation.ended || !this.scene.removedMoveAnimation.ended) {		
 		if (this.scene.removedMoveAnimation != undefined)
 			if (this.scene.removedMoveAnimation.ended)
 				this.destinationCell.pieceType = 0;
@@ -225,6 +226,14 @@ Board.prototype.pieceMoveAnimation = function() {
 	this.pieceBeingMovedY = this.selectedCell.y;
 	this.pieceBeingRemovedX = this.destinationCell.x;
 	this.pieceBeingRemovedY = this.destinationCell.y;
+	
+	if (this.scene.backupPlays[this.scene.backupPlays.length - 1] != undefined) {
+		this.scene.backupPlays[this.scene.backupPlays.length - 1].x1 = this.pieceBeingMovedX;
+		this.scene.backupPlays[this.scene.backupPlays.length - 1].y1 = this.pieceBeingMovedY;		
+		this.scene.backupPlays[this.scene.backupPlays.length - 1].x2 = this.pieceBeingRemovedX;
+		this.scene.backupPlays[this.scene.backupPlays.length - 1].y2 = this.pieceBeingRemovedY;
+	}
+	
 	this.pieceBeingRemovedType = this.destinationCell.pieceType;
 	
 	if ((this.scene.activeGameMode == 2 && this.scene.botInPlay) || this.scene.activeGameMode == 3) {
@@ -237,26 +246,44 @@ Board.prototype.pieceMoveAnimation = function() {
 	
 	if (this.pieceBeingRemovedY > this.pieceBeingMovedY) {
 		this.pieceBeingMovedAngle = - Math.PI / 2;
-		if (this.pieceBeingRemovedX < this.pieceBeingMovedX)
+		if (this.pieceBeingRemovedX < this.pieceBeingMovedX) {
 			this.scene.selectedMoveAnimation = new LinearAnimation(this.scene, "id", this.animationSpeed, [[0,0,0],[40 * distance,40 * distance,0]]);
-		else if (this.pieceBeingRemovedX > this.pieceBeingMovedX)
+			this.scene.selCoords.push([40 * distance,40 * distance,0]);
+		} else if (this.pieceBeingRemovedX > this.pieceBeingMovedX) {
 			this.scene.selectedMoveAnimation = new LinearAnimation(this.scene, "id", this.animationSpeed, [[0,0,0],[40 * distance,-40 * distance,0]]);
-		else if (this.pieceBeingRemovedX == this.pieceBeingMovedX)
+			this.scene.selCoords.push([40 * distance,-40 * distance,0]);
+		} else if (this.pieceBeingRemovedX == this.pieceBeingMovedX) {
 			this.scene.selectedMoveAnimation = new LinearAnimation(this.scene, "id", this.animationSpeed, [[0,0,0],[40 * distance,0,0]]);
+			this.scene.selCoords.push([40 * distance,0,0]);
+		}
+		if (this.scene.backupPlays[this.scene.backupPlays.length - 1] != undefined)
+			this.scene.backupPlays[this.scene.backupPlays.length - 1].angle = this.pieceBeingMovedAngle;
 	} else if (this.pieceBeingRemovedY < this.pieceBeingMovedY) {
 		this.pieceBeingMovedAngle = Math.PI / 2;
-		if (this.pieceBeingRemovedX < this.pieceBeingMovedX)
+		if (this.pieceBeingRemovedX < this.pieceBeingMovedX) {
 			this.scene.selectedMoveAnimation = new LinearAnimation(this.scene, "id", this.animationSpeed, [[0,0,0],[-40 * distance,40 * distance,0]]);
-		else if (this.pieceBeingRemovedX > this.pieceBeingMovedX)
+			this.scene.selCoords.push([-40 * distance,40 * distance,0]);
+		} else if (this.pieceBeingRemovedX > this.pieceBeingMovedX) {
 			this.scene.selectedMoveAnimation = new LinearAnimation(this.scene, "id", this.animationSpeed, [[0,0,0],[-40 * distance,-40 * distance,0]]);
-		else if (this.pieceBeingRemovedX == this.pieceBeingMovedX)
+			this.scene.selCoords.push([-40 * distance,-40 * distance,0]);
+		} else if (this.pieceBeingRemovedX == this.pieceBeingMovedX) {
 			this.scene.selectedMoveAnimation = new LinearAnimation(this.scene, "id", this.animationSpeed, [[0,0,0],[-40 * distance,0,0]]);
+			this.scene.selCoords.push([-40 * distance,0,0]);
+		}
+		if (this.scene.backupPlays[this.scene.backupPlays.length - 1] != undefined)
+			this.scene.backupPlays[this.scene.backupPlays.length - 1].angle = this.pieceBeingMovedAngle;
 	} else if (this.pieceBeingRemovedY == this.pieceBeingMovedY) {
 		this.pieceBeingMovedAngle = 0;
-		if (this.pieceBeingRemovedX < this.pieceBeingMovedX)
+		if (this.pieceBeingRemovedX < this.pieceBeingMovedX) {
 			this.scene.selectedMoveAnimation = new LinearAnimation(this.scene, "id", this.animationSpeed, [[0,0,0],[0,40 * distance,0]]);
-		else if (this.pieceBeingRemovedX > this.pieceBeingMovedX)
+			this.scene.selCoords.push([0,40 * distance,0]);
+		} else if (this.pieceBeingRemovedX > this.pieceBeingMovedX) {
 			this.scene.selectedMoveAnimation = new LinearAnimation(this.scene, "id", this.animationSpeed, [[0,0,0],[0,-40 * distance,0]]);
+			this.scene.selCoords.push([0,-40 * distance,0]);
+		}
+		
+		if (this.scene.backupPlays[this.scene.backupPlays.length - 1] != undefined)
+			this.scene.backupPlays[this.scene.backupPlays.length - 1].angle = this.pieceBeingMovedAngle;
 	}
 	
 	this.pieceYouAreFired();
@@ -279,19 +306,31 @@ Board.prototype.pieceYouAreFired = function() {
 	else
 		multX = 0;
 	
-	if (this.pieceBeingRemovedType == 2) // red
-		this.scene.removedMoveAnimation = new RemovedAnimation(this.scene, "id", 300, 2,
-		[[0,0,0],[0,0,40],
-			[-111 - 40*(this.pieceBeingRemovedY - 1) - dN * normalColumnsTwo, 138 - dN * normalLinesTwo + dN * multX, 40],
-			[-111 - 40*(this.pieceBeingRemovedY - 1) - dN * normalColumnsTwo, 138 - dN * normalLinesTwo + dN * multX, 0]]);
-	else // blue
-		this.scene.removedMoveAnimation = new RemovedAnimation(this.scene, "id", 300, 1,
-		[[0,0,0],[0,0,40],
-			[69 + 40*(9 - this.pieceBeingRemovedY) + dL * normalColumnsOne, 138 - dP * normalLinesOne + dP * multX, 40],
-			[69 + 40*(9 - this.pieceBeingRemovedY) + dL * normalColumnsOne, 138 - dP * normalLinesOne + dP * multX, 0]]);
+	var c01 = [0,0,0];
+	var c02 = [0,0,40];
+	var c03 = [-111 - 40*(this.pieceBeingRemovedY - 1) - dN * normalColumnsTwo, 138 - dN * normalLinesTwo + dN * multX, 40];
+	var c04 = [-111 - 40*(this.pieceBeingRemovedY - 1) - dN * normalColumnsTwo, 138 - dN * normalLinesTwo + dN * multX, 0];
+	
+	var c11 = [0,0,0];
+	var c12 = [0,0,40];
+	var c13 = [69 + 40*(9 - this.pieceBeingRemovedY) + dL * normalColumnsOne, 138 - dP * normalLinesOne + dP * multX, 40];
+	var c14 = [69 + 40*(9 - this.pieceBeingRemovedY) + dL * normalColumnsOne, 138 - dP * normalLinesOne + dP * multX, 0];
+	
+	if (this.pieceBeingRemovedType == 2 || this.pieceBeingRemovedType == 4) { // red
+		this.scene.removedMoveAnimation = new RemovedAnimation(this.scene, "id", 200, this.pieceBeingRemovedType, [c01, c02, c03, c04]);
+		this.scene.backupCoords.push([c04,c03,c02,c01]);
+	} else { // blue
+		this.scene.removedMoveAnimation = new RemovedAnimation(this.scene, "id", 200, this.pieceBeingRemovedType, [c11, c12, c13, c14]);
+		this.scene.backupCoords.push([c14,c13,c12,c11]);
+	}
 			
-	if (this.pieceBeingRemovedType == 0)
+	if (this.pieceBeingRemovedType == 0) {
 		this.scene.removedMoveAnimation.ended = true;
+		
+		if (this.scene.backupPlays[this.scene.backupPlays.length - 1] != undefined) {
+			this.scene.backupPlays[this.scene.backupPlays.length - 1].movable = false;
+		}
+	}
 }
 	
 Board.prototype.getPossibleMoves = function() {
@@ -301,15 +340,23 @@ Board.prototype.getPossibleMoves = function() {
 		for (var j = 0; j < 8; j++) {
 			if (this.selectedCell != this.cells[i][j]) {
 				if (this.selectedCell.pieceType != this.cells[i][j].pieceType) {
-					var direction = this.getDirection(this.selectedCell, this.cells[i][j]);
-					
-					if (direction != "unreachable")
-						emptyInBetween = this.emptyInBetween(this.selectedCell, this.cells[i][j], direction);
-					else
-						emptyInBetween = false;
-					
-					if (emptyInBetween == true)
-						this.possibleCells.push(this.cells[i][j]);
+					if (this.selectedCell.pieceType == 1 && this.cells[i][j].pieceType != 3 || this.selectedCell.pieceType == 2 && this.cells[i][j].pieceType != 4) {
+						var direction = this.getDirection(this.selectedCell, this.cells[i][j]);
+						
+						if (direction != "unreachable")
+							emptyInBetween = this.emptyInBetween(this.selectedCell, this.cells[i][j], direction);
+						else
+							emptyInBetween = false;
+						
+						if (emptyInBetween == true)
+							this.possibleCells.push(this.cells[i][j]);
+					} else if (this.selectedCell.pieceType == 3 && this.cells[i][j].pieceType != 1 || this.selectedCell.pieceType == 4 && this.cells[i][j].pieceType != 2) {
+						var one = Math.abs(this.selectedCell.x - 1 - j);
+						var two = Math.abs(this.selectedCell.y - 1 - i);
+						
+						if (one < 2 && two < 2)
+							this.possibleCells.push(this.cells[i][j]);
+					}
 				}
 			}
 		}
@@ -325,6 +372,37 @@ Board.prototype.getDirection = function(cellOne, cellTwo) {
 		return "diagonal";
 	else
 		return "unreachable";
+}
+
+Board.prototype.winner = function() {
+	if (this.scene.countdown() < 0)
+		if (this.scene.activePlayer == 1)
+			return "Blue";
+		else if (this.scene.activePlayer == 2)
+			return "Red";
+	
+	var foundRed = false;
+	var foundBlue = false;
+	
+	for (var i = 0; i < 8; i++) {
+		for (var j = 0; j < 8; j++) {
+			if (this.cells[i][j] == undefined)
+				return "undefined";
+			
+			if (this.cells[i][j] != undefined && this.cells[i][j].pieceType == 3)
+				foundBlue = true;
+			
+			if (this.cells[i][j] != undefined && this.cells[i][j].pieceType == 4)
+				foundRed = true;
+		}
+	}
+	
+	if (!foundRed)
+		return "Blue";
+	else if (!foundBlue)
+		return "Red";
+	else
+		return "No";
 }
 
 Board.prototype.emptyInBetween = function(cellOne, cellTwo, direction) {

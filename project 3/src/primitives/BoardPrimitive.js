@@ -4,6 +4,7 @@ function BoardPrimitive(scene) {
     this.scene = scene;
 	this.leftoversOne = [];
 	this.leftoversTwo = [];
+	this.unpoped = true;
 };
 
 BoardPrimitive.prototype = Object.create(CGFobject.prototype);
@@ -117,8 +118,12 @@ BoardPrimitive.prototype.displayPieces = function() {
 					this.scene.rotate(this.scene.board.pieceBeingMovedAngle, 0, 1, 0);		
 				}
 				
-				if (this.scene.board.pieceBeingRemovedX == cell.x && this.scene.board.pieceBeingRemovedX == cell.y)
-					this.scene.removedMoveAnimation.animate(this.scene.elapsedTime);	
+				if (this.scene.removedMoveAnimation != undefined)
+					if (!this.scene.removedMoveAnimation.ended)
+						if (this.scene.board.pieceBeingRemovedX == cell.x && this.scene.board.pieceBeingRemovedY == cell.y) {
+							this.scene.removedMoveAnimation.animate(this.scene.elapsedTime);
+							this.scene.rotate(0, 0, 1, 0);		
+					}
 
 				this.scene.king.display();	
 				this.scene.popMatrix();				
@@ -150,13 +155,48 @@ BoardPrimitive.prototype.displayPieces = function() {
 							this.scene.removedMoveAnimation.animate(this.scene.elapsedTime);
 							this.scene.rotate(0, 0, 1, 0);		
 					}
+					
+				if (this.scene.board.returnAnimation != undefined) {
+					if (this.scene.backupPlays[this.scene.backupPlays.length - 1].movable == false)
+						this.scene.board.returnAnimation.ended = true;
+						
+					if (this.scene.board.undoAnimation == undefined) {
+						if (!this.scene.board.returnAnimation.ended || !this.scene.board.backAnimation.ended) {
+							if (this.unpoped && this.scene.backupPlays[this.scene.backupPlays.length - 1].movable != false) {
+								if (this.scene.backupPlays[this.scene.backupPlays.length - 1].player == 1)
+									this.leftoversOne.pop();
+								else
+									this.leftoversTwo.pop();
+								
+								this.unpoped = false;
+							}
+							
+								
+							if (this.scene.backupPlays[this.scene.backupPlays.length - 1].x2 == cell.x && this.scene.backupPlays[this.scene.backupPlays.length - 1].y2 == cell.y)
+								this.scene.board.returnAnimation.animate(this.scene.elapsedTime);
+								
+							if (this.scene.backupPlays[this.scene.backupPlays.length - 1].x1 == cell.x && this.scene.backupPlays[this.scene.backupPlays.length - 1].y1 == cell.y) {
+								this.scene.board.backAnimation.animate(this.scene.elapsedTime);
+								this.scene.rotate(- this.scene.backupPlays[this.scene.backupPlays.length - 1].angle, 0, 1, 0);
+							}
+						} else {				
+							this.unpoped = true;
+							this.scene.backupPlays.pop();
+							this.scene.backupCoords.pop();
+							this.scene.moviePlays.pop();
+							this.scene.selCoords.pop();
+							this.scene.board.returnAnimation = undefined;
+							this.scene.board.backAnimation = undefined;
+						}
+					}
+				}
 				
 
 				this.scene.translate(i * 40, 0, 0);
 				this.scene.soldier.display();
 					
 				this.scene.popMatrix();			
-			} else {				
+			} else {			
 				counter++;
 			}
 		}
@@ -171,7 +211,12 @@ BoardPrimitive.prototype.displayLeftoversOne = function() {
 			this.scene.translate(-5, -15 + 1.5 * i, 0);
 			this.scene.scale(0.05, 0.05, 0.05);	
 			this.scene.blueColor.apply();
-			this.scene.soldier.display();		
+			
+			if (this.leftoversOne[i] == 1)	
+				this.scene.soldier.display();
+			else
+				this.scene.king.display();
+			
 			this.scene.popMatrix();	
 		} else if (i < 18){
 			this.scene.pushMatrix();
@@ -179,7 +224,12 @@ BoardPrimitive.prototype.displayLeftoversOne = function() {
 			this.scene.translate(-5 - 1.5, -15 + 1.5 * (i-9), 0);
 			this.scene.scale(0.05, 0.05, 0.05);	
 			this.scene.blueColor.apply();		
-			this.scene.soldier.display();			
+
+			if (this.leftoversOne[i] == 1)	
+				this.scene.soldier.display();
+			else
+				this.scene.king.display();
+
 			this.scene.popMatrix();			
 		} else if (i < 27) {
 			this.scene.pushMatrix();
@@ -187,7 +237,12 @@ BoardPrimitive.prototype.displayLeftoversOne = function() {
 			this.scene.translate(-5 - 3, -15 + 1.5 * (i-18), 0);
 			this.scene.scale(0.05, 0.05, 0.05);	
 			this.scene.blueColor.apply();		
-			this.scene.soldier.display();			
+
+			if (this.leftoversOne[i] == 1)	
+				this.scene.soldier.display();
+			else
+				this.scene.king.display();
+
 			this.scene.popMatrix();		
 		} else {
 			this.scene.pushMatrix();
@@ -195,7 +250,12 @@ BoardPrimitive.prototype.displayLeftoversOne = function() {
 			this.scene.translate(-5 - 4.5, -15 + 1.5 * (i-27), 0);
 			this.scene.scale(0.05, 0.05, 0.05);	
 			this.scene.blueColor.apply();		
-			this.scene.soldier.display();			
+
+			if (this.leftoversOne[i] == 1)	
+				this.scene.soldier.display();
+			else
+				this.scene.king.display();
+
 			this.scene.popMatrix();		
 		}
 	}
@@ -209,7 +269,12 @@ BoardPrimitive.prototype.displayLeftoversTwo = function() {
 			this.scene.translate(20, -15 + 1.5 * i, 0);
 			this.scene.scale(0.05, 0.05, 0.05);	
 			this.scene.redColor.apply();
-			this.scene.soldier.display();	
+
+			if (this.leftoversTwo[i] == 2)	
+				this.scene.soldier.display();
+			else
+				this.scene.king.display();
+
 			this.scene.popMatrix();	
 		} else if (i < 18) {
 			this.scene.pushMatrix();
@@ -217,7 +282,12 @@ BoardPrimitive.prototype.displayLeftoversTwo = function() {
 			this.scene.translate(20 + 1.5, -15 + 1.5 * (i-9), 0);
 			this.scene.scale(0.05, 0.05, 0.05);	
 			this.scene.redColor.apply();	
-			this.scene.soldier.display();		
+
+			if (this.leftoversTwo[i] == 2)	
+				this.scene.soldier.display();
+			else
+				this.scene.king.display();
+
 			this.scene.popMatrix();			
 		} else if (i < 27) {
 			this.scene.pushMatrix();
@@ -225,7 +295,12 @@ BoardPrimitive.prototype.displayLeftoversTwo = function() {
 			this.scene.translate(20 + 3, -15 + 1.5 * (i-18), 0);
 			this.scene.scale(0.05, 0.05, 0.05);	
 			this.scene.redColor.apply();	
-			this.scene.soldier.display();		
+
+			if (this.leftoversTwo[i] == 2)	
+				this.scene.soldier.display();
+			else
+				this.scene.king.display();
+
 			this.scene.popMatrix();			
 		} else {
 			this.scene.pushMatrix();
@@ -233,7 +308,12 @@ BoardPrimitive.prototype.displayLeftoversTwo = function() {
 			this.scene.translate(20 + 4.5, -15 + 1.5 * (i-27), 0);
 			this.scene.scale(0.05, 0.05, 0.05);	
 			this.scene.redColor.apply();	
-			this.scene.soldier.display();		
+
+			if (this.leftoversTwo[i] == 2)	
+				this.scene.soldier.display();
+			else
+				this.scene.king.display();
+
 			this.scene.popMatrix();			
 		}
 	}
@@ -255,7 +335,6 @@ BoardPrimitive.prototype.display = function() {
 		if (this.scene.board.undoAnimation.ended) {
 			var reverseBoard = this.scene.board.rotatePrologBoard(this.scene.backupPlays[this.scene.backupPlays.length - 1].backupBoard);
 			this.scene.board.create(reverseBoard);
-			this.scene.backupPlays.pop();
 			this.scene.board.undoAnimation = undefined;
 		} else
 		this.scene.board.undoAnimation.animate(this.scene.elapsedTime);

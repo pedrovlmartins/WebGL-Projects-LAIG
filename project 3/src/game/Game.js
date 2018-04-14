@@ -105,6 +105,8 @@ Game.prototype.init = function (application) {
 	this.selectedMoveAnimation;
 	this.removedMoveAnimation;
 	
+	this.backupCoords = [];
+	this.selCoords = [];
 	this.backupPlays = [];
 	this.moviePlays = [];
 	this.incounter = 0;
@@ -210,8 +212,10 @@ Game.prototype.startGame = function () {
 	this.activePlayer = 1;
 	this.activeBot = 1;
 	this.backupPlays = [];
+	this.moviePlays = [];
 	this.botInPlay = false;
 	this.botPlaying = false;
+	this.isPlayingMovie = false;
 	this.lastMoveTime = this.elapsedTime;
 	
 	this.board.selectedCell = null;
@@ -235,23 +239,24 @@ Game.prototype.undo = function() {
 	if (this.activeGameMode == 1) {
 		if (this.backupPlays.length > 0) {
 			this.board.undoAnimation = new CircularAnimation(this, "BoardRotation", 3, 0, 0, 0, 0, 0, 180, -1);
-			this.board.create(this.backupPlays[this.backupPlays.length - 1].backupBoard);
+			
+			var coords = this.backupCoords[this.backupCoords.length - 1];
+			var selcoords = this.selCoords[this.selCoords.length - 1];
+			var finalselcoords = [selcoords, [0,0,0]];
+			
+			this.board.returnAnimation = new RemovedAnimation(this, "id", 300, 5, coords);
+			this.board.backAnimation = new LinearAnimation(this, "id", this.board.animationSpeed, finalselcoords);
 			
 			if (this.activePlayer == 1)
 				this.activePlayer = 2;
 			else
 				this.activePlayer = 1;
-			
-			if (this.backupPlays[this.backupPlays.length - 1].player == 1)
-				this.board.boardPrimitive.leftoversOne.pop();
-			else
-				this.board.boardPrimitive.leftoversTwo.pop();
 		}
 	}
 }
 
 Game.prototype.playMovie = function() {
-	if (!this.isPlayingMovie) {
+	if (!this.isPlayingMovie && this.activeGameMode != 3) {
 		this.board = new Board(this);
 		this.getPrologRequest('start');
 		this.board.boardPrimitive.leftoversOne = [];
@@ -270,8 +275,9 @@ Game.prototype.playMovie = function() {
 		this.activeGameMode = 3;
 		this.isPlayingMovie = true;
 		this.moviePlays.reverse();
-		
-		this.gameStarted = true;
+	} else {
+		this.isPlayingMovie = false;
+		this.startGame();
 	}
 }
 
@@ -452,7 +458,9 @@ Game.prototype.logPicking = function ()
 
 
 Game.prototype.display = function() {
-	if (!this.changingPlayer && !this.botPlaying && this.activeGameMode != 3)
+	var winner = this.board.winner();
+	
+	if (!this.changingPlayer && !this.botPlaying && this.activeGameMode != 3 && winner == 'No')
 		this.logPicking();
 	
 	if (this.botPlaying) {
@@ -500,8 +508,12 @@ Game.prototype.display = function() {
 	this.yellowColor = new CGFappearance(this);
 	this.yellowColor.setAmbient(1, 1, 0, 1);	
 
-	this.board.display();
-	this.timer.display();
+	if (this.gameStarted) {
+		this.board.display();
+		
+		if (!this.isPlayingMovie)
+			this.timer.display();
+	}
 	
 	if (this.activeBackground == "Room")
 		this.room.display();

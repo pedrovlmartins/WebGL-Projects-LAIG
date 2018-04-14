@@ -80,7 +80,7 @@ Game.prototype.getPrologRequest = function(requestString, onSuccess, onError, po
 			
 			if (game.activeGameMode != 1)
 				game.botPlay("botMovePiece");
-		}
+		} 
  	};
 
  	request.onerror = onError || function() { console.log("error"); };

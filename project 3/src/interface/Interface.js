@@ -69,6 +69,6 @@ Interface.prototype.addGameOptions = function(lights) {
 	
 	group.add(start, 'start').name("Start game");
 	group.add(this.scene, 'gameMode', ['Human vs Human', 'Human vs Bot', 'Bot vs Bot']).name("Game mode");
-	group.add(this.scene, 'botType', ['Cell selection', 'Piece capture']).name("Bot type");
+	group.add(this.scene, 'botType', ['Cell selection', 'King capture']).name("Bot type");
 	group.add(undo, 'undo').name("Undo last move");
 }

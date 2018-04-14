@@ -5,6 +5,7 @@ function Timer(scene) {
 	
 	this.redText = new Obj(this.scene, 'Objects/redText.obj');
 	this.blueText = new Obj(this.scene, 'Objects/blueText.obj');
+	this.winnerText = new Obj(this.scene, 'Objects/winnerText.obj');
 	
 	this.zero = new Obj(this.scene, 'Objects/zero.obj');
 	this.one = new Obj(this.scene, 'Objects/one.obj');
@@ -22,41 +23,70 @@ Timer.prototype = Object.create(CGFobject.prototype);
 Timer.prototype.constructor = Timer;
 
 Timer.prototype.display = function() {
-	this.scene.pushMatrix();
-	this.scene.scale(0.05, 0.05, 0.05);
-	this.scene.rotate(-Math.PI / 3, 1, 0, 0);
-	this.scene.rotate(-Math.PI / 2, 1, 0, 0);
-	this.scene.translate(41, 90, 0);
-
-	if (this.scene.activeGameMode == 1 && this.scene.activePlayer == 1)
-		this.scene.redColor.apply();
-	else if (this.scene.activeGameMode == 1)
-		this.scene.blackColor.apply();
-	else
-		this.scene.redColor.apply();
-
-	this.redText.display();
-	this.scene.popMatrix();
+	var gameOver = this.scene.board.winner();
 	
-	this.scene.pushMatrix();
-	this.scene.scale(0.05, 0.05, 0.05);
-	this.scene.rotate(-Math.PI / 3, 1, 0, 0);
-	this.scene.rotate(-Math.PI / 2, 1, 0, 0);
-	this.scene.translate(218, 78, 0);
-	
-	if (this.scene.activeGameMode == 1 && this.scene.activePlayer == 2)
-		this.scene.blueColor.apply();
-	else if (this.scene.activeGameMode == 1)
-		this.scene.blackColor.apply();
-	else
-		this.scene.blueColor.apply();
+	if (gameOver == "No") {
+		this.scene.pushMatrix();
+		this.scene.scale(0.05, 0.05, 0.05);
+		this.scene.rotate(-Math.PI / 3, 1, 0, 0);
+		this.scene.rotate(-Math.PI / 2, 1, 0, 0);
+		this.scene.translate(41, 90, 0);
+
+		if (this.scene.activeGameMode == 1 && this.scene.activePlayer == 1)
+			this.scene.redColor.apply();
+		else if (this.scene.activeGameMode == 1)
+			this.scene.blackColor.apply();
+		else
+			this.scene.redColor.apply();
+
+		this.redText.display();
+		this.scene.popMatrix();
 		
-	this.blueText.display();
-	this.scene.popMatrix();	
+		this.scene.pushMatrix();
+		this.scene.scale(0.05, 0.05, 0.05);
+		this.scene.rotate(-Math.PI / 3, 1, 0, 0);
+		this.scene.rotate(-Math.PI / 2, 1, 0, 0);
+		this.scene.translate(218, 78, 0);
+		
+		if (this.scene.activeGameMode == 1 && this.scene.activePlayer == 2)
+			this.scene.blueColor.apply();
+		else if (this.scene.activeGameMode == 1)
+			this.scene.blackColor.apply();
+		else
+			this.scene.blueColor.apply();
+			
+		this.blueText.display();
+		this.scene.popMatrix();	
+		
+		this.displayFirstPieces();
+		this.displaySecondPieces();
+		this.displayTimer();
+	} else if (gameOver != "undefined") {
+		this.displayWinner(gameOver);
+	}
+}
+
+Timer.prototype.displayWinner = function(gameOver) {
+	this.scene.pushMatrix();
 	
-	this.displayFirstPieces();
-	this.displaySecondPieces();
-	this.displayTimer();
+	this.scene.scale(0.05, 0.05, 0.05);
+	this.scene.rotate(-Math.PI / 3, 1, 0, 0);
+	this.scene.rotate(-Math.PI / 2, 1, 0, 0);
+	this.scene.translate(105, 90, 0);
+	this.scene.whiteColor.apply();	
+	this.winnerText.display();
+	
+	if (gameOver == "Blue") {
+		this.scene.translate(25, -40, 0);
+		this.scene.blueColor.apply();	
+		this.blueText.display();
+	} else if (gameOver == "Red") {
+		this.scene.translate(30, -25, 0);
+		this.scene.redColor.apply();	
+		this.redText.display();
+	}
+	
+	this.scene.popMatrix();			
 }
 
 Timer.prototype.displayFirstPieces = function() {

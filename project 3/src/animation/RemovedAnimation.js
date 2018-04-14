@@ -51,10 +51,10 @@ class RemovedAnimation extends Animation {
             effectiveTime = this.animationDuration;
             this.ended = true;
 			
-			if (this.type == 2)
-				this.scene.board.boardPrimitive.leftoversTwo.push(1);
-			else
-				this.scene.board.boardPrimitive.leftoversOne.push(1);
+			if (this.type == 2 || this.type == 4)
+				this.scene.board.boardPrimitive.leftoversTwo.push(this.type);
+			else if (this.type != 5)
+				this.scene.board.boardPrimitive.leftoversOne.push(this.type);
         }
 
         // distance equals speed * time.
